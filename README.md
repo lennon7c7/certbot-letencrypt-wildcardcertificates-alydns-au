@@ -124,6 +124,12 @@ $ ./certbot-auto certificates
 $ ./certbot-auto renew --cert-name simplehttps.com  --manual-auth-hook "/脚本目录/au.sh php aly add" --manual-cleanup-hook "/脚本目录/au.sh php aly clean"
 ```
 
+3：docker环境里 对机器上所有证书 renew
+
+```
+docker run --rm -it -v /etc/letsencrypt/:/etc/letsencrypt/ certbot/certbot renew --preferred-challenges dns-01 --server https://acme-v02.api.letsencrypt.org/directory --manual-auth-hook "sh /etc/letsencrypt/certbot-letencrypt-wildcardcertificates-alydns-au/au.sh python aly add" --manual-cleanup-hook "sh /etc/letsencrypt/certbot-letencrypt-wildcardcertificates-alydns-au/au.sh python aly clean" --deploy-hook  "nginx -t && nginx -s reload"
+```
+
 ### 加入 crontab
 
 编辑文件 /etc/crontab :
